@@ -1,0 +1,1457 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kỷ Yếu 12A1 — Sổ Tay Thanh Xuân (2023 – 2026)</title>
+<meta name="description" content="Cuốn sổ tay tương tác 3D lưu giữ thanh xuân, tình bạn và 1.000 ngày rực rỡ nhất của tập thể lớp 12A1.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Dancing+Script:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="images/home/lop-12a1.jpg">
+<style>
+:root {
+  --paper: #f2ece1;
+  --paper-warm: #faf6ee;
+  --ink: #2c251d;
+  --ink-soft: rgba(44, 37, 29, 0.68);
+  --ink-faint: rgba(44, 37, 29, 0.44);
+  --hairline: rgba(44, 37, 29, 0.15);
+  --earth: #9a5b2e;
+  --earth-dark: #6e3e1c;
+  --earth-light: rgba(154, 91, 46, 0.14);
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --font: 'Lora', Georgia, serif;
+  --script: 'Dancing Script', cursive;
+  --track-caps: .22em;
+  --track-nav: .04em;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font);
+  font-weight: 400;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+::selection { background: rgba(44, 37, 29, 0.85); color: var(--paper); }
+
+/* Thanh tiến độ cuộn trên cùng */
+.scroll-bar {
+  position: fixed; top: 0; left: 0; right: 0; height: 2.5px; z-index: 900;
+  background: var(--earth); transform-origin: 0 50%; transform: scaleX(var(--sp, 0));
+  pointer-events: none;
+}
+
+/* Nền giấy mỹ thuật + màu nước loang hoài niệm */
+.wash {
+  position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(circle at 16% 14%, rgba(214, 189, 152, 0.38), transparent 48%),
+    radial-gradient(circle at 84% 20%, rgba(188, 198, 174, 0.30), transparent 52%),
+    radial-gradient(circle at 50% 86%, rgba(206, 174, 142, 0.28), transparent 55%),
+    repeating-linear-gradient(0deg, rgba(44,37,29,0.015) 0px, rgba(44,37,29,0.015) 1px, transparent 1px, transparent 3px),
+    var(--paper);
+}
+
+/* ---------------- Thanh điều hướng trên cùng ---------------- */
+.top {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; flex-direction: column; align-items: center; gap: 9px;
+  padding-inline: clamp(14px, 4vw, 48px);
+  padding-block: 14px 46px;
+  pointer-events: none; text-align: center;
+}
+.top > * { pointer-events: auto; }
+.top:before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(242, 236, 225, 0.96), rgba(242, 236, 225, 0.76) 54%, rgba(242, 236, 225, 0));
+  -webkit-backdrop-filter: blur(12px) saturate(.95);
+  backdrop-filter: blur(12px) saturate(.95);
+  -webkit-mask-image: linear-gradient(180deg, #000 50%, transparent);
+  mask-image: linear-gradient(180deg, #000 50%, transparent);
+}
+.top-head {
+  display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%;
+}
+.top .name {
+  font-family: var(--display);
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: .01em;
+  line-height: 1;
+}
+.top .badge {
+  font-family: system-ui, sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .16em;
+  padding: 3px 8px; border-radius: 6px;
+  background: rgba(154, 91, 46, 0.14); color: var(--earth);
+}
+.top nav {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: clamp(10px, 1.6vw, 22px);
+  font-size: 14px; align-items: center;
+  letter-spacing: var(--track-nav);
+}
+.top nav a { color: var(--ink-soft); transition: color .2s; position: relative; padding: 2px 0; }
+.top nav a:hover, .top nav a[aria-current] { color: var(--ink); font-weight: 500; }
+.top nav a:after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1.5px;
+  background: var(--earth); transform: scaleX(0); transition: transform .25s ease;
+}
+.top nav a:hover:after, .top nav a[aria-current]:after { transform: scaleX(1); }
+.top nav a.pill-room {
+  padding: 3px 11px; border-radius: 999px;
+  background: rgba(154, 91, 46, 0.12); color: var(--earth-dark); font-weight: 500;
+}
+.top nav a.pill-room:after { display: none; }
+.top nav a.pill-room:hover { background: var(--earth); color: #fff; }
+
+@media (max-width: 720px) {
+  .top { padding-inline: 10px; padding-block: 11px 38px; gap: 6px; }
+  .top .name { font-size: 21px; }
+  .top nav { gap: 7px 11px; font-size: 12.5px; }
+}
+
+/* ---------------- Khu vực Hero Sổ Tay 3D ---------------- */
+.hero {
+  position: relative; display: grid; justify-items: center; align-content: center;
+  min-height: 100svh; overflow-anchor: none;
+  padding: clamp(104px, 12svh, 138px) 0 clamp(62px, 8svh, 96px);
+}
+.botany {
+  position: absolute; width: clamp(130px, 14vw, 230px); opacity: 0.34;
+  pointer-events: none; user-select: none; z-index: 0; color: var(--earth);
+}
+.botany.l { left: clamp(-20px, 1vw, 18px); bottom: 6%; }
+.botany.r { right: clamp(-20px, 1vw, 18px); top: 18%; transform: rotate(180deg); }
+@media (max-width: 900px) { .botany { display: none; } }
+
+.hero-kicker {
+  font-size: 11px; font-weight: 500; letter-spacing: var(--track-caps);
+  text-align: center; color: var(--ink-soft);
+  margin: 0 0 clamp(14px, 2.2vh, 26px); text-transform: uppercase;
+}
+.hero-down {
+  position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+  border: 0; background: transparent; padding: 8px 14px; color: var(--ink);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  animation: cue-breathe 2.6s ease-in-out infinite; z-index: 3;
+}
+.hero-down:hover { animation: none; opacity: 1; }
+@keyframes cue-breathe { 0%, 100% { opacity: .2 } 50% { opacity: .75 } }
+
+/* ---------------- Sân khấu Sổ Tay 3D ---------------- */
+.hero, .hero * { -webkit-user-select: none; -moz-user-select: none; user-select: none; }
+.hero img { -webkit-user-drag: none; user-drag: none; }
+.sb-wrap { display: grid; justify-items: center; gap: 14px; width: 100%; position: relative; z-index: 2; }
+.sb-stage {
+  display: flex; align-items: center; justify-content: center; width: 100%;
+  position: relative; touch-action: pan-y;
+}
+.sb-arrow {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  padding: 8px 8px; border: 0; background: transparent; color: var(--ink-faint);
+  cursor: pointer; transition: color .2s, transform .2s;
+  -webkit-tap-highlight-color: transparent; z-index: 8;
+}
+.sb-arrow:hover { color: var(--ink); transform: scale(1.1); }
+
+.sb-3d {
+  position: relative; flex: 1 1; min-width: 0; max-width: 920px;
+  perspective: 1800px; perspective-origin: 50% 46%;
+}
+.sb-tilt {
+  position: relative; transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--zoom, 1));
+  will-change: transform;
+}
+.sb-book { position: relative; width: 100%; aspect-ratio: 1760 / 1240; transform-style: preserve-3d; z-index: 1; }
+
+.sb-cast { position: absolute; pointer-events: none; z-index: 0; }
+.sb-cast.ambient {
+  left: 4%; right: 4%; top: 14%; bottom: -2%;
+  background: radial-gradient(50% 50% at 50% 54%, rgba(58, 44, 26, .32) 0%, rgba(58, 44, 26, .16) 45%, rgba(58, 44, 26, 0) 76%);
+  filter: blur(24px); opacity: calc(1 - var(--shade, 0) * .38);
+}
+.sb-cast.contact {
+  left: 7%; right: 7%; top: 55%; bottom: 2%;
+  background: radial-gradient(50% 44% at 50% 46%, rgba(44, 32, 14, .38) 0%, rgba(44, 32, 14, .14) 52%, rgba(44, 32, 14, 0) 78%);
+  filter: blur(10px); opacity: calc(1 - var(--shade, 0) * .45);
+}
+
+.sb-full { position: absolute; inset: 0; }
+.sb-full img { width: 100%; height: auto; display: block; border-radius: 6px; }
+.sb-half { position: absolute; top: 0; bottom: 0; width: 50%; overflow-x: clip; overflow-y: visible; }
+.sb-half.left { left: 0; }
+.sb-half.right { left: 50%; }
+.sb-half-img { width: 200%; max-width: none; height: auto; display: block; }
+.sb-half-img.right { margin-left: -100%; }
+
+.gutter-shade {
+  position: absolute; top: var(--pg, 5%); bottom: var(--pg, 5%); width: 46%;
+  pointer-events: none; opacity: calc(var(--shade, 0) * .65);
+}
+.gutter-shade.left { right: 0; background: linear-gradient(270deg, rgba(44, 32, 14, .32), rgba(44, 32, 14, 0) 82%); }
+.gutter-shade.right { left: 0; background: linear-gradient(90deg, rgba(44, 32, 14, .26), rgba(44, 32, 14, 0) 82%); }
+
+/* ---- Lá trang uốn cong 18 dải 3D ---- */
+.curl {
+  position: absolute; top: 0; height: 100%;
+  width: calc(var(--bw, 0px) * var(--span));
+  transform-style: preserve-3d; z-index: 6;
+}
+.curl.next { left: 50%; transform-origin: left center; transform: rotateY(calc(-1 * var(--tt, 0deg))); }
+.curl.prev { right: 50%; transform-origin: right center; transform: rotateY(var(--tt, 0deg)); }
+.strip {
+  position: absolute; top: 0; height: 100%;
+  width: calc(var(--bw, 0px) * var(--span) / var(--n));
+  transform-style: preserve-3d;
+}
+.curl.next .strip { transform-origin: left center; }
+.curl.prev .strip { transform-origin: right center; }
+.curl.next > .strip { left: 0; }
+.curl.prev > .strip { right: 0; left: auto; }
+.curl.next .strip .strip { left: 100%; transform: rotateY(var(--td, 0deg)); }
+.curl.prev .strip .strip { right: 100%; transform: rotateY(calc(-1 * var(--td, 0deg))); }
+.face {
+  position: absolute; top: 0; bottom: 0; left: 0; right: -1.1px;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  background-repeat: no-repeat; background-size: var(--bw, 0px) auto;
+}
+.face.back { transform: rotateY(180deg); }
+.face .sh { position: absolute; left: 0; right: 0; top: var(--pg, 5%); bottom: var(--pg, 5%); pointer-events: none; }
+.curl.next .face.front .sh, .curl.prev .face.back .sh {
+  background: linear-gradient(90deg, rgba(58, 43, 20, var(--a1, 0)), rgba(58, 43, 20, var(--a2, 0)));
+}
+.curl.next .face.back .sh, .curl.prev .face.front .sh {
+  background: linear-gradient(90deg, rgba(58, 43, 20, var(--a2, 0)), rgba(58, 43, 20, var(--a1, 0)));
+}
+.face .gl {
+  position: absolute; left: 0; right: 0; top: var(--pg, 5%); bottom: var(--pg, 5%);
+  pointer-events: none; background: #fffaf0;
+  opacity: calc(var(--shade, 0) * var(--lit, 1) * var(--lit, 1) * .22);
+}
+
+/* ---- Kính lúp đồng cổ phóng đại 2.3x ---- */
+.loupe {
+  position: absolute; left: 0; top: 0;
+  width: var(--lr, 240px); height: var(--lr, 240px);
+  pointer-events: none; z-index: 80; opacity: 0;
+  transition: opacity .25s ease; will-change: transform;
+}
+.loupe.on { opacity: 1; }
+.loupe.held .ring { cursor: grabbing; }
+.loupe .ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  pointer-events: auto; cursor: grab;
+  padding: calc(var(--lr, 240px) * .058);
+  box-shadow:
+    0 1px 2px rgba(58, 44, 26, .30),
+    0 10px 18px rgba(58, 44, 26, .24),
+    0 26px 40px rgba(58, 44, 26, .20);
+}
+.loupe .ring:before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  background: linear-gradient(146deg,
+    #fdf7e9 0%, #e6d7b4 14%, #b69d70 32%, #7d6740 50%,
+    #cdbb92 66%, #f4ead3 80%, #9b8459 100%);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .8), inset 0 -2px 3px rgba(70, 52, 26, .5);
+  -webkit-mask-image: radial-gradient(circle closest-side at 50% 50%, transparent 0 88.2%, #000 89.8% 100%);
+  mask-image: radial-gradient(circle closest-side at 50% 50%, transparent 0 88.2%, #000 89.8% 100%);
+}
+.loupe .grip {
+  position: absolute; left: 50%; top: 50%;
+  width: calc(var(--lr, 240px) * .72); height: calc(var(--lr, 240px) * .12);
+  transform-origin: 0 50%;
+  transform: rotate(40deg) translate(calc(var(--lr, 240px) * .33), -50%);
+  border-radius: calc(var(--lr, 240px) * .06);
+  pointer-events: auto; cursor: grab;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .46) 0 13%, rgba(255, 255, 255, 0) 44%, rgba(0, 0, 0, .26) 100%),
+    linear-gradient(90deg, #d9bd82 0 14%, #a9884e 14% 20%, #6d4c2b 20% 62%, #5a3d22 62% 92%, #7a563180 92% 100%);
+  box-shadow: 0 8px 15px rgba(58, 44, 26, .26), 0 18px 26px rgba(58, 44, 26, .14);
+}
+.lens {
+  position: relative; display: block; width: 100%; height: 100%; border-radius: 50%;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0 1px rgba(52, 40, 22, .55),
+    inset 0 4px 12px rgba(40, 30, 14, .28),
+    inset 0 -7px 16px rgba(255, 250, 240, .14);
+}
+.zoomwrap {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 2; opacity: 0;
+}
+.zoominner { position: absolute; inset: 0; transform-origin: 0 0; }
+.lens:before, .lens:after { content: ""; position: absolute; inset: 0; border-radius: 50%; pointer-events: none; }
+.lens:before {
+  z-index: 1;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 54%, rgba(58, 44, 26, .10) 76%, rgba(46, 34, 16, .34) 100%);
+  box-shadow: inset 0 0 0 2px rgba(130, 162, 196, .24), inset 0 0 0 4px rgba(206, 158, 112, .15);
+}
+.lens:after {
+  z-index: 2;
+  background:
+    radial-gradient(36% 26% at 29% 19%, rgba(255, 255, 255, .32), rgba(255, 255, 255, 0) 76%),
+    radial-gradient(24% 16% at 74% 86%, rgba(255, 255, 255, .12), rgba(255, 255, 255, 0) 80%);
+}
+
+/* ---- Thanh thông tin & Nút mở chương ---- */
+.sb-meta-bar {
+  display: flex; flex-direction: column; align-items: center; gap: 9px;
+  padding: 0 16px; text-align: center;
+}
+.sb-captions { display: grid; justify-items: center; }
+.sb-captions > * { grid-area: 1 / 1; margin: 0; }
+.sb-caption {
+  font-family: var(--display); font-size: clamp(19px, 2.1vw, 25px); font-weight: 700;
+  letter-spacing: .03em; color: var(--ink);
+  animation: sb-cap-in .45s ease both;
+}
+.sb-caption.live { animation: none; }
+@keyframes sb-cap-in { 0% { opacity: 0; transform: translateY(4px); } }
+
+.cta-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.chapter-cta {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 18px; border-radius: 999px;
+  border: 1px solid rgba(154, 91, 46, 0.4);
+  background: rgba(250, 246, 238, 0.88);
+  color: var(--earth-dark); font-size: 13px; font-weight: 500; letter-spacing: .03em;
+  transition: all .22s ease;
+}
+.chapter-cta:hover {
+  background: var(--earth); color: #fffaf2; transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(154, 91, 46, 0.22);
+}
+.chapter-cta.secondary {
+  border-color: var(--hairline); color: var(--ink-soft);
+}
+.chapter-cta.secondary:hover {
+  background: var(--ink); color: var(--paper); border-color: var(--ink);
+}
+
+.sb-tools {
+  display: flex; align-items: center; gap: 6px;
+  border: 1px solid var(--hairline); border-radius: 999px;
+  padding: 4px 10px; background: rgba(250, 246, 238, .75);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.tool {
+  width: 29px; height: 29px; display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%; background: transparent; color: var(--ink-soft);
+  cursor: pointer; transition: background-color .18s ease, color .18s ease;
+}
+.tool:hover { background: rgba(255, 252, 244, .95); color: var(--ink); }
+.tool[aria-pressed="true"] { background: var(--earth-light); color: var(--earth); }
+.tool:disabled { opacity: .32; cursor: default; background: transparent; }
+.tool svg { width: 15px; height: 15px; display: block; }
+.tool-sep { width: 1px; height: 16px; background: var(--hairline); margin: 0 2px; }
+.zoom-read {
+  font-size: 11px; letter-spacing: .08em; color: var(--ink-faint);
+  min-width: 40px; text-align: center; font-variant-numeric: tabular-nums;
+}
+@media (pointer: coarse) { .loupe { display: none; } }
+
+.sb-zone {
+  position: absolute; top: 0; bottom: 0; border: 0; background: transparent;
+  cursor: grab; z-index: 60; -webkit-tap-highlight-color: transparent;
+}
+.sb-zone:active { cursor: grabbing; }
+.sb-prev { left: 0; width: 50%; }
+.sb-next { right: 0; width: 50%; }
+
+.sb-hint {
+  margin: 0; font-size: 11.5px; letter-spacing: .06em; color: var(--ink-faint);
+  transition: opacity .4s ease;
+}
+.sb-hint.gone { opacity: 0; }
+.sb-wrap.intro .sb-full img, .sb-wrap.intro .sb-half-img { filter: url(#sb-mblur-1); }
+.sb-wrap.intro.b2 .sb-full img, .sb-wrap.intro.b2 .sb-half-img { filter: url(#sb-mblur-2); }
+
+@media (max-width: 640px) {
+  .hero-kicker { font-size: 10px; letter-spacing: .14em; padding: 0 14px; }
+  .sb-wrap { width: 100vw; margin-inline: calc(50% - 50vw); }
+  .sb-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 70; padding: 12px 6px; }
+  .sb-arrow.left { left: 2px; }
+  .sb-arrow.right { right: 2px; }
+  .sb-3d { max-width: none; }
+}
+
+/* ---------------- Đường kẻ hoa văn & Các phần nội dung ---------------- */
+.rule {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  width: min(880px, 84vw); margin: clamp(32px, 6vh, 64px) auto; color: var(--earth); opacity: .55;
+}
+.rule:before, .rule:after { content: ""; flex: 1; height: 1px; background: var(--hairline); }
+.rule.short { width: min(440px, 60vw); }
+
+.section-label {
+  font-size: 11.5px; letter-spacing: var(--track-caps); text-transform: uppercase;
+  color: var(--earth); margin: 0 0 16px; font-weight: 600;
+}
+.about {
+  position: relative; max-width: 1040px; margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 48px);
+  display: grid; grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(24px, 5vw, 60px); align-items: center;
+}
+.bio {
+  font-size: clamp(16.5px, 1.6vw, 19px); line-height: 1.82;
+  margin: 0; font-weight: 400; max-width: 58ch;
+}
+.bio-quote {
+  font-family: var(--script); font-size: 25px; color: var(--earth);
+  margin-top: 14px; display: block;
+}
+.stamp-card {
+  width: clamp(180px, 20vw, 250px); padding: 14px 14px 24px;
+  background: #fffdf9; border: 1px solid var(--hairline);
+  box-shadow: 0 12px 28px rgba(44, 37, 29, 0.11);
+  transform: rotate(2.5deg); text-align: center;
+}
+.stamp-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; background: #e6dccb; }
+.stamp-card span {
+  display: block; margin-top: 10px; font-family: var(--script);
+  font-size: 20px; color: var(--ink-soft);
+}
+@media (max-width: 760px) {
+  .about { grid-template-columns: 1fr; }
+  .stamp-card { width: 220px; justify-self: center; }
+}
+
+/* Mục lục 9 chương thanh xuân */
+.plates { max-width: 1040px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px); }
+.plate-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hairline); }
+.plate-row {
+  display: grid; grid-template-columns: 3em minmax(0, 1fr) auto auto;
+  gap: 16px; align-items: center;
+  padding: 14px 6px; border-bottom: 1px solid var(--hairline);
+  transition: background-color .22s ease, padding-left .22s ease;
+}
+.plate-row:hover, .plate-row[aria-current="true"] {
+  background: rgba(255, 252, 244, .7); padding-left: 14px;
+}
+.plate-jump {
+  display: contents; border: 0; background: transparent; text-align: left;
+  cursor: pointer; color: inherit;
+}
+.plate-row .n { font-size: 12px; color: var(--ink-faint); letter-spacing: var(--track-nav); }
+.plate-row .t { font-family: var(--display); font-size: clamp(20px, 2.2vw, 26px); font-weight: 700; }
+.plate-row .p { font-size: 12px; color: var(--ink-faint); letter-spacing: .06em; text-transform: uppercase; }
+.plate-row[aria-current="true"] .p { color: var(--earth); font-weight: 600; }
+.plate-link {
+  font-size: 12.5px; color: var(--earth-dark); padding: 5px 13px;
+  border: 1px solid rgba(154, 91, 46, 0.32); border-radius: 999px;
+  transition: all .2s; white-space: nowrap;
+}
+.plate-link:hover { background: var(--earth); color: #fff; }
+@media (max-width: 640px) {
+  .plate-row { grid-template-columns: 2.2em minmax(0, 1fr) auto; }
+  .plate-row .p { display: none; }
+}
+
+/* Nút nhanh Trả bài cũ & Trình phát nhạc Piano */
+.fab-quiz {
+  position: fixed; left: 16px; bottom: 16px; z-index: 600;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 15px; border-radius: 999px;
+  background: rgba(44, 36, 22, 0.92); color: #faf6ee;
+  border: 1px solid rgba(232, 214, 172, 0.5);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+  font-size: 12.5px; font-weight: 500;
+  transition: transform .2s ease, background .2s;
+}
+.fab-quiz:hover { transform: translateY(-2px); background: #3b2f1c; }
+
+.music-pill {
+  position: fixed; right: 16px; bottom: 16px; z-index: 600;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 9px 15px; border-radius: 999px;
+  background: rgba(250, 246, 238, 0.92);
+  border: 1px solid var(--hairline);
+  box-shadow: 0 8px 24px rgba(44, 37, 29, 0.14);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  cursor: pointer; color: var(--ink); font-size: 12.5px; font-weight: 500;
+  transition: transform .2s ease;
+}
+.music-pill:hover { transform: translateY(-2px); }
+.vinyl {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: conic-gradient(from 0deg, #2c251d, #6b533b, #2c251d, #8a6d4b, #2c251d);
+  display: grid; place-items: center;
+}
+.vinyl:after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--paper); }
+.music-pill.playing .vinyl { animation: spin 4s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.foot {
+  font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink-faint); text-align: center; padding-bottom: 74px;
+}
+</style>
+</head>
+<body>
+<div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
+<div class="wash" aria-hidden="true"></div>
+
+<main class="page home">
+  <header class="top">
+    <div class="top-head">
+      <a class="name" href="index.html">Thanh Xuân</a>
+      <span class="badge">12A1 · 2023 – 2026</span>
+    </div>
+    <nav aria-label="Điều hướng chính">
+      <a href="index.html" aria-current="page">Trang chủ</a>
+      <a href="sao.html">Thành viên</a>
+      <a href="video.html">Video</a>
+      <a href="khoanh-khac.html">Khoảnh khắc</a>
+      <a href="hanh-trinh.html">Hành trình</a>
+      <a href="thay-co.html">Thầy cô</a>
+      <a href="luu-but.html">Lưu bút</a>
+      <a href="phong-12a1.html" class="pill-room">Phòng 12A1</a>
+    </nav>
+  </header>
+
+  <section id="sketchbook" class="hero">
+    <svg class="botany l" viewBox="0 0 160 220" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+      <path d="M18 210 C 42 150, 75 95, 135 24" />
+      <path d="M52 152 C 32 140, 20 124, 24 106 C 42 114, 52 132, 52 152 Z" />
+      <path d="M78 112 C 98 106, 118 112, 128 126 C 108 132, 90 124, 78 112 Z" />
+      <path d="M104 72 C 84 60, 74 42, 80 26 C 96 36, 104 54, 104 72 Z" />
+    </svg>
+    <svg class="botany r" viewBox="0 0 160 220" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+      <path d="M18 210 C 42 150, 75 95, 135 24" />
+      <path d="M52 152 C 32 140, 20 124, 24 106 C 42 114, 52 132, 52 152 Z" />
+      <path d="M78 112 C 98 106, 118 112, 128 126 C 108 132, 90 124, 78 112 Z" />
+    </svg>
+
+    <p class="hero-kicker">Sổ Tay Kỷ Yếu Tương Tác · 10A1 → 11A1 → 12A1</p>
+
+    <div class="sb-wrap" id="sbWrap">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <filter id="sb-mblur-1"><feGaussianBlur stdDeviation="5 0"/></filter>
+        <filter id="sb-mblur-2"><feGaussianBlur stdDeviation="14 0"/></filter>
+      </svg>
+
+      <div class="sb-stage" id="sbStage">
+        <button class="sb-arrow left" id="sbLeft" aria-label="Trang trước">
+          <svg viewBox="0 0 14 44" width="16" height="48" fill="none"><polyline points="11,3 3,22 11,41" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="sb-3d" id="sb3d">
+          <div class="sb-tilt" id="sbTilt">
+            <div class="sb-cast ambient" aria-hidden="true"></div>
+            <div class="sb-cast contact" aria-hidden="true"></div>
+            <div class="sb-book" id="sbBook"></div>
+          </div>
+          <div class="zoomwrap" id="zoomWrap" aria-hidden="true"><div class="zoominner" id="zoomInner"></div></div>
+          <div class="loupe" id="loupe" title="Kéo kính lúp để soi chi tiết trang sách">
+            <span class="grip"></span>
+            <span class="ring"><span class="lens" id="loupeLens"></span></span>
+          </div>
+        </div>
+
+        <button class="sb-arrow right" id="sbRight" aria-label="Trang sau">
+          <svg viewBox="0 0 14 44" width="16" height="48" fill="none"><polyline points="3,3 11,22 3,41" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="sb-meta-bar">
+        <div class="sb-captions" id="sbCaptions"></div>
+        <div class="cta-group">
+          <a class="chapter-cta" id="chapterCta" href="sao.html">Khám phá Bầu Trời Sao →</a>
+          <a class="chapter-cta secondary" href="hanh-trinh.html">Hành trình 3 năm</a>
+        </div>
+      </div>
+
+      <div class="sb-tools" role="group" aria-label="Điều khiển sổ tay">
+        <button class="tool" id="zOut" aria-label="Thu nhỏ" title="Thu nhỏ">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8.6" cy="8.6" r="5.6"/><path d="M12.8 12.8 17.4 17.4M6.2 8.6h4.8"/></svg>
+        </button>
+        <span class="zoom-read" id="zRead">100%</span>
+        <button class="tool" id="zIn" aria-label="Phóng to" title="Phóng to">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8.6" cy="8.6" r="5.6"/><path d="M12.8 12.8 17.4 17.4M6.2 8.6h4.8M8.6 6.2v4.8"/></svg>
+        </button>
+        <span class="tool-sep" aria-hidden="true"></span>
+        <button class="tool" id="loupeBtn" aria-label="Bật/tắt kính lúp" aria-pressed="true" title="Kính lúp đồng cổ phóng đại 2.3x">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8.8" cy="8.8" r="5.8"/><path d="M13 13l4.4 4.4"/><path d="M6.4 7.2a3.2 3.2 0 0 1 2.4-1.4" opacity=".55"/></svg>
+        </button>
+        <button class="tool" id="autoPlayBtn" aria-label="Tự động lật trang" aria-pressed="false" title="Tự động lật trang trình chiếu">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="7,5 15,10 7,15"/></svg>
+        </button>
+      </div>
+
+      <p class="sb-hint" id="sbHint">Kéo mép trang để lật sách · Kéo kính lúp qua ảnh để soi từng gương mặt</p>
+    </div>
+
+    <button class="hero-down" id="heroDown" aria-label="Cuộn xuống lời ngỏ">
+      <svg viewBox="0 0 44 22" width="34" height="17" fill="none">
+        <polyline points="3,3 22,11 41,3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="3,11 22,19 41,11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </section>
+
+  <div class="rule" aria-hidden="true">✦</div>
+
+  <section id="about" class="about">
+    <div>
+      <p class="section-label">Lời Ngỏ Thanh Xuân</p>
+      <p class="bio">
+        Từ những người xa lạ bước qua cánh cổng trường mùa thu năm 2023, chúng ta đã cùng nhau đi qua 1.000 ngày dưới mái nhà mang tên <strong>12A1</strong>. Cuốn sổ tay này lưu giữ từng nụ cười rạng rỡ, những giờ trả bài thót tim, lời dạy dịu dàng của thầy cô và 42 vì tinh tú mang theo ước mơ tuổi mười tám.
+        <span class="bio-quote">“Chúng ta của những năm tháng ấy — rực rỡ nhất, chân thành nhất và không bao giờ lặp lại.”</span>
+      </p>
+    </div>
+    <figure class="stamp-card">
+      <img src="images/home/lop-12a1.jpg" alt="Tập thể lớp 12A1" onerror="this.style.display='none'">
+      <span>Cả lớp 12A1 — Mãi là một gia đình</span>
+    </figure>
+  </section>
+
+  <div class="rule short" aria-hidden="true">✦</div>
+
+  <section id="plates" class="plates">
+    <p class="section-label">Mục Lục 9 Chương Kỷ Yếu</p>
+    <ol class="plate-list" id="plateList"></ol>
+  </section>
+
+  <div class="rule short" aria-hidden="true">✦</div>
+  <p class="foot">Kỷ Yếu Lớp 12A1 · Niên Khóa 2023 – 2026 · Hẹn Ngày Gặp Lại</p>
+</main>
+
+<a class="fab-quiz" href="tra-bai-cu.html" title="Mở vòng quay Trả bài cũ">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e8d6ac" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+  Trả bài cũ
+</a>
+
+<button class="music-pill" id="musicBtn" aria-pressed="false" title="Bật/tắt nhạc piano kỷ yếu">
+  <span class="vinyl" aria-hidden="true"></span>
+  <span id="musicLabel">Nhạc Piano: Tắt</span>
+</button>
+<audio id="bgAudio" loop preload="none">
+  <source src="audio/piano/theme.mp3" type="audio/mpeg">
+</audio>
+
+<script id="x12-embedded-data" type="application/json">{"className": "12A1", "years": "2023 – 2026", "memberCount": 42, "members": ["Trần Thị Vân Anh", "Tô Thị Ngọc Bích", "Nguyễn Quang Chuẩn", "Nguyễn Hoàng Danh", "Phan Quốc Đại", "Trần Thị Hồng Gấm", "Nguyễn Thị Ngọc Giàu", "Nguyễn Lê Ngọc Hà", "Tạ Đỗ Thanh Hằng", "Nguyễn Thoại Gia Hân", "Nguyễn Trọng Hiếu", "Nguyễn Đức Hùng", "Nguyễn Thanh Nhật Huy", "Trương Nhật Huy", "Ngô Tuấn Khải", "Nguyễn Nhật Khánh", "Tạ Phùng Vân Khánh", "Đỗ Anh Khôi", "Nguyễn Hoàng Anh Kiệt", "Trần Mai Khởi My", "Nguyễn Hữu Nghĩa", "Lưu Hồng Bảo Ngọc", "Trần Thị Hồng Ngọc", "Nguyễn Trung Nguyên", "Phan Nguyễn Đức Nhân", "Trần Trọng Nhân", "Nguyễn Quỳnh Như", "Nguyễn Tiến Phúc", "Trần Hoàng Phúc", "Lý Nhân Tài", "Thái Minh Tâm", "Lê Hoàng Thái", "Nguyễn Mai Quốc Thắng", "Nguyễn Thanh Thương", "Lê Xuân Tới", "Cao Ngọc Trầm", "Nguyễn Huỳnh Nhật Trường", "Nguyễn Phi Trường", "Nguyễn Phong Vinh", "Lê Ngọc Tường Vy", "Nguyễn Phạm Tường Vy", "Phạm Nguyễn Triệu Vy"], "chapters": [{"lop": "10A1", "sub": "Nơi mọi thứ bắt đầu.", "intro": "Chúng ta bước vào cánh cổng trường cấp ba với chiếc áo đồng phục còn tinh tươm mùi vải mới, ngơ ngác nhìn nhau và tự hỏi: Ai sẽ là người cùng mình đi qua ba năm này?", "closeTitle": "Một năm khép lại", "closeQuote": "Từ những người xa lạ, chúng ta đã trở thành 10A1.", "photo": "./images/10a1/group-ending.jpg"}, {"lop": "11A1", "sub": "Những ngày chúng ta trưởng thành cùng nhau.", "intro": "Chúng ta gặp lại nhau sau một mùa hè dài. Lần này, không còn sự ngượng ngùng của những người xa lạ, mà là cái ôm vồ vập của những đứa bạn thân thiết.", "closeTitle": "Vượt qua sóng gió cùng nhau", "closeQuote": "Lớp 11 dạy chúng ta cách gắn kết, sẻ chia và hiểu rằng có một tập thể luôn đứng sau lưng mình.", "photo": "./images/11a1/group-ending.jpg"}, {"lop": "12A1", "sub": "Chặng cuối của thanh xuân.", "intro": "Chúng ta bước vào năm học cuối cấp với những xấp đề cương dày cộm, nhưng ánh mắt ai nấy đều lấp lánh quyết tâm và cả sự luyến lưu từng ngày bên nhau.", "closeTitle": "Ngày cuối cùng ngồi chung một lớp học", "closeQuote": "Tiếng trống trường vang lên lần cuối, khép lại 1000 ngày rực rỡ nhất của tuổi trẻ. Tạm biệt 12A1, tạm biệt những năm tháng không bao giờ quên!", "photo": "./images/12a1/final-farewell.jpg"}], "teachers": [{"loai": "gvcn", "name": "Cô Đông", "role": "GVCN 10A1 → 12A1", "mon": "Giáo viên chủ nhiệm", "quote": "Người đồng hành suốt ba năm, từ ngày đầu bỡ ngỡ đến chặng cuối thanh xuân.", "photo": "./media/images/3f604f15-f4bb-4a18-b329-a2c4281117e6-co-thiep.webp"}, {"loai": "bo-mon", "name": "Thầy/Cô môn Toán", "role": "Giáo viên Toán", "mon": "Toán", "quote": "Mỗi bài toán khó là một lần chúng em học cách không bỏ cuộc.", "photo": ""}, {"loai": "bo-mon", "name": "Thầy/Cô môn Vật lý", "role": "Giáo viên Vật lý", "mon": "Vật lý", "quote": "Cảm ơn thầy cô đã cho chúng em thấy thế giới vận hành đẹp đến thế nào.", "photo": ""}, {"loai": "bo-mon", "name": "Thầy/Cô môn Hóa học", "role": "Giáo viên Hóa học", "mon": "Hóa học", "quote": "Từ những phản ứng trong phòng thí nghiệm đến những điều tử tế trong đời.", "photo": ""}, {"loai": "bo-mon", "name": "Thầy Be", "role": "Giáo viên Sinh học,THNH, GDĐP", "mon": "Sinh học,THNH, GDĐP", "quote": "Kiến thức trong sách vở có thể phai mờ theo năm tháng, nhưng sự tử tế, lòng nhân ái và bài học làm người mà thầy dạy sẽ theo chúng em đi suốt cuộc đời", "photo": "./media/images/65b50ed8-9fb6-4004-bb4f-12fa7922663b-thay-be.webp"}, {"loai": "bo-mon", "name": "Thầy/Cô môn Ngữ văn", "role": "Giáo viên Ngữ văn", "mon": "Ngữ văn", "quote": "Nhờ thầy cô, chúng em biết yêu chữ và biết thương người.", "photo": ""}, {"loai": "bo-mon", "name": "Thầy/Cô môn Tiếng Anh", "role": "Giáo viên Tiếng Anh", "mon": "Tiếng Anh", "quote": "Cảm ơn đã mở cho chúng em cánh cửa nhìn ra thế giới.", "photo": ""}, {"loai": "bo-mon", "name": "Thầy/Cô môn Tin học", "role": "Giáo viên Tin học", "mon": "Tin học", "quote": "Cảm ơn đã dạy chúng em cách tư duy và giải quyết vấn đề.", "photo": ""}, {"loai": "bo-mon", "name": "Thầy/Cô môn Lịch sử", "role": "Giáo viên Lịch sử", "mon": "Lịch sử", "quote": "Nhớ về quá khứ để biết trân trọng hôm nay.", "photo": ""}, {"loai": "bo-mon", "name": "Thầy/Cô môn GDKT & PL", "role": "Giáo viên Giáo dục kinh tế và pháp luật", "mon": "Giáo dục kinh tế và pháp luật", "quote": "Những bài học để chúng em bước vào đời vững vàng hơn.", "photo": ""}, {"loai": "bo-mon", "name": "Thầy/Cô môn Thể dục", "role": "Giáo viên Giáo dục thể chất", "mon": "Giáo dục thể chất", "quote": "Những giờ ra sân là những tiếng cười đẹp nhất của lớp mình.", "photo": ""}], "journeyCount": 14}</script>
+<script>
+/* =====================================================================
+   SỔ TAY KỶ YẾU 12A1 — Cơ chế lật trang cong 18 dải 3D + Kính lúp 2.3x
+   ===================================================================== */
+const EMBED = JSON.parse(document.getElementById('x12-embedded-data').textContent || '{}');
+const memberTotal = EMBED.memberCount || 42;
+const sampleNames = (EMBED.members || []).slice(0, 12).join(' · ');
+
+const CHAPTERS = [
+  {
+    title: 'Bìa Kỷ Yếu 12A1 — Chúng Ta Của Những Năm Tháng Ấy',
+    subtitle: 'Chương I · Tập Thể 12A1',
+    ctaText: 'Khám phá 42 vì sao 12A1 →',
+    link: 'sao.html',
+    photo: 'images/home/lop-12a1.jpg',
+    leftHeading: 'Tập Thể 12A1',
+    leftNote: '“Ba năm, một tập thể — từ những người xa lạ bước vào 10A1, chúng ta đã trở thành một phần ký ức không thể thay thế của nhau.”',
+    rightHeading: 'Ngày Nắng Sân Trường',
+    rightNote: 'Kéo chiếc kính lúp đồng qua bức ảnh để phóng đại 2.3x và nhìn rõ từng nụ cười của lớp mình!'
+  },
+  {
+    title: 'Lớp 10A1 — Nơi Mọi Thứ Bắt Đầu (2023 – 2024)',
+    subtitle: 'Chương II · Năm Nhất Bỡ Ngỡ',
+    ctaText: 'Xem hành trình lớp 10A1 →',
+    link: 'hanh-trinh.html#10a1',
+    photo: 'media/images/ba811b71-ebe8-4a60-9a4a-5ef9a743a734-10a1-lan-au.webp',
+    leftHeading: '10A1 · Năm Nhất',
+    leftNote: (EMBED.chapters && EMBED.chapters[0] && EMBED.chapters[0].intro) || '“Chúng ta bước vào cánh cổng trường cấp ba với chiếc áo đồng phục còn tinh tươm mùi vải mới...”',
+    rightHeading: 'Từ Xa Lạ Thành Thân Quen',
+    rightNote: 'Những ngày đầu bầu ban cán sự, đặt biệt danh và lần đầu trang trí bảng phấn tri ân 20/11.'
+  },
+  {
+    title: 'Lớp 11A1 — Trưởng Thành & Gắn Kết (2024 – 2025)',
+    subtitle: 'Chương III · Năm Hai Rực Rỡ',
+    ctaText: 'Xem hành trình lớp 11A1 →',
+    link: 'hanh-trinh.html#11a1',
+    photo: 'media/images/bef9fe2c-9471-4fb7-b061-523dfdaca8f8-lop-tr.webp',
+    leftHeading: '11A1 · Năm Hai',
+    leftNote: (EMBED.chapters && EMBED.chapters[1] && EMBED.chapters[1].intro) || '“Không còn sự ngượng ngùng ban đầu, mà là cái ôm vồ vập của những đứa bạn thân thiết.”',
+    rightHeading: 'Văn Nghệ & Hội Chợ Thanh Xuân',
+    rightNote: 'Từ giải Nhất văn nghệ toàn trường, gian hàng ẩm thực cháy hàng đến ngày 8/3 ngọt ngào.'
+  },
+  {
+    title: 'Lớp 12A1 — Chặng Cuối Thanh Xuân (2025 – 2026)',
+    subtitle: 'Chương IV · Năm Cuối Cấp',
+    ctaText: 'Xem hành trình lớp 12A1 →',
+    link: 'hanh-trinh.html#12a1',
+    photo: 'images/home/lop-12a1.jpg',
+    leftHeading: '12A1 · Năm Cuối',
+    leftNote: (EMBED.chapters && EMBED.chapters[2] && EMBED.chapters[2].intro) || '“Những xấp đề cương dày cộm, ánh mắt lấp lánh quyết tâm và sự luyến lưu từng ngày bên nhau.”',
+    rightHeading: '1.000 Ngày Rực Rỡ',
+    rightNote: 'Lễ khai giảng cuối cùng của thời học sinh và những buổi chiều ở lại ôn bài cùng nhau.'
+  },
+  {
+    title: 'Người Lái Đò Thầm Lặng — Tri Ân Thầy Cô',
+    subtitle: 'Chương V · Ơn Nghĩa Thầy Cô',
+    ctaText: 'Mở trang Tri ân Thầy Cô →',
+    link: 'thay-co.html',
+    photo: 'media/images/3f604f15-f4bb-4a18-b329-a2c4281117e6-co-thiep.webp',
+    leftHeading: 'Cô Đông & Thầy Cô Bộ Môn',
+    leftNote: '“Người đồng hành suốt ba năm, từ ngày đầu bỡ ngỡ đến chặng cuối thanh xuân.”',
+    rightHeading: 'Cô Chủ Nhiệm Kính Yêu',
+    rightNote: 'Cảm ơn thầy cô đã kiên nhẫn dìu dắt chúng em nên người bằng tất cả sự dịu dàng và tận tụy.'
+  },
+  {
+    title: 'Khoảnh Khắc & Thước Phim Thanh Xuân',
+    subtitle: 'Chương VI · Album & Video',
+    ctaText: 'Xem Khoảnh khắc & Video →',
+    link: 'khoanh-khac.html',
+    photo: 'media/images/2ec3d0a2-fb76-4188-88ea-94eab5d87ebb-moi-la-10a1.webp',
+    leftHeading: 'Góc Kỷ Niệm 12A1',
+    leftNote: 'Những bức ảnh chụp vội giờ ra chơi, hậu trường văn nghệ và những thước phim lưu giữ tiếng cười.',
+    rightHeading: 'Từng Khung Hình Sống Động',
+    rightNote: 'Khám phá trọn bộ album ảnh hậu trường và video kỷ yếu của lớp mình.'
+  },
+  {
+    title: 'Bầu Trời Sao 12A1 — ' + memberTotal + ' Vì Tinh Tú',
+    subtitle: 'Chương VII · Hồ Sơ Thành Viên',
+    ctaText: 'Bay vào Bầu trời sao 3D →',
+    link: 'sao.html',
+    photo: 'images/galaxy-clouds.png',
+    leftHeading: memberTotal + ' Vì Sao Tỏa Sáng',
+    leftNote: sampleNames ? ('Gặp gỡ: ' + sampleNames + '… và toàn thể 42 thành viên 12A1.') : 'Mỗi thành viên là một ngôi sao mang cá tính riêng trong ngân hà 12A1.',
+    rightHeading: 'Ngân Hà Kỷ Niệm 3D',
+    rightNote: 'Xoay dải ngân hà 3D, chạm vào từng vì sao để đọc hồ sơ, biệt danh và lời nhắn của từng bạn.'
+  },
+  {
+    title: 'Lưu Bút & Phòng Bí Mật 12A1',
+    subtitle: 'Chương VIII · Góc Riêng Tư',
+    ctaText: 'Mở Sổ Lưu Bút →',
+    link: 'luu-but.html',
+    photo: '',
+    leftHeading: 'Trang Lưu Bút & Mật Mã',
+    leftNote: 'Những dòng thư viết tay gửi lại cho mai sau và căn phòng bí mật với 42 chiếc chìa khóa riêng.',
+    rightHeading: 'Mở Khóa Lời Nhắn Riêng',
+    rightNote: 'Ghé thăm Lưu Bút để viết thêm kỷ niệm hoặc vào Phòng 12A1 để mở khóa thông điệp của bạn.'
+  },
+  {
+    title: 'Trả Bài Cũ & Lời Kết Thanh Xuân',
+    subtitle: 'Chương IX · Hẹn Ngày Gặp Lại',
+    ctaText: 'Chơi vòng quay Trả bài cũ →',
+    link: 'tra-bai-cu.html',
+    photo: '',
+    leftHeading: 'Vòng Quay Trả Bài Cũ',
+    leftNote: 'Quay gọi tên ngẫu nhiên một thành viên 12A1 để lắng nghe lời chúc và lưu lại vào sổ kỷ niệm.',
+    rightHeading: 'Khép Lại Để Bắt Đầu',
+    rightNote: 'Tiếng trống trường vang lên lần cuối — tạm biệt 12A1, hẹn gặp lại vào những mùa hè rực rỡ mai sau!'
+  }
+];
+
+const M = CHAPTERS.length;
+const wrap = document.getElementById('sbWrap');
+const stage = document.getElementById('sbStage');
+const sb3d = document.getElementById('sb3d');
+const book = document.getElementById('sbBook');
+const capBox = document.getElementById('sbCaptions');
+const chapterCta = document.getElementById('chapterCta');
+const hint = document.getElementById('sbHint');
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ------------------------------------------------ Bộ dựng trang sổ Canvas 1760x1240 */
+function resolveAssetUrl(src) {
+  if (!src) return '';
+  if (location.protocol === 'file:' && src.startsWith('/')) return src.slice(1);
+  return src;
+}
+
+function loadImageSafe(src) {
+  return new Promise(resolve => {
+    const clean = resolveAssetUrl(src);
+    if (!clean) return resolve(null);
+    const im = new Image();
+    im.onload = () => resolve(im);
+    im.onerror = () => resolve(null);
+    im.src = clean;
+  });
+}
+
+function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
+  const words = (text || '').split(' ');
+  let line = '';
+  let curY = y;
+  for (let n = 0; n < words.length; n++) {
+    const testLine = line + words[n] + ' ';
+    if (ctx.measureText(testLine).width > maxWidth && n > 0) {
+      ctx.fillText(line.trim(), x, curY);
+      line = words[n] + ' ';
+      curY += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+  ctx.fillText(line.trim(), x, curY);
+  return curY + lineHeight;
+}
+
+async function renderSpreadDataUrl(ch, index) {
+  const W = 1760, H = 1240;
+  const canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  // Bìa da nâu cổ điển bao quanh
+  ctx.fillStyle = '#5a4028';
+  ctx.beginPath();
+  ctx.roundRect(42, 32, W - 84, H - 64, 26);
+  ctx.fill();
+
+  // Viền chỉ vàng trang trí trên bìa
+  ctx.strokeStyle = 'rgba(232, 214, 172, 0.35)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.roundRect(54, 44, W - 108, H - 88, 20);
+  ctx.stroke();
+
+  // Hai mặt giấy kem bên trong
+  const drawPaperHalf = (x, w, isLeft) => {
+    const grad = ctx.createLinearGradient(x, 0, x + w, 0);
+    if (isLeft) {
+      grad.addColorStop(0, '#f2eadb');
+      grad.addColorStop(0.92, '#fcf8f0');
+      grad.addColorStop(1, '#dfd2bc');
+    } else {
+      grad.addColorStop(0, '#dfd2bc');
+      grad.addColorStop(0.08, '#fcf8f0');
+      grad.addColorStop(1, '#f2eadb');
+    }
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.roundRect(x, 58, w, H - 116, isLeft ? [15, 4, 4, 15] : [4, 15, 15, 4]);
+    ctx.fill();
+
+    // Đường kẻ ngang sổ tay
+    ctx.strokeStyle = 'rgba(154, 91, 46, 0.11)';
+    ctx.lineWidth = 1.5;
+    for (let ly = 210; ly < H - 125; ly += 48) {
+      ctx.beginPath();
+      ctx.moveTo(x + 56, ly);
+      ctx.lineTo(x + w - 56, ly);
+      ctx.stroke();
+    }
+  };
+
+  drawPaperHalf(72, W / 2 - 72, true);
+  drawPaperHalf(W / 2, W / 2 - 72, false);
+
+  // Rãnh gáy giữa sách
+  const spineGrad = ctx.createLinearGradient(W / 2 - 28, 0, W / 2 + 28, 0);
+  spineGrad.addColorStop(0, 'rgba(44, 32, 18, 0)');
+  spineGrad.addColorStop(0.5, 'rgba(44, 32, 18, 0.28)');
+  spineGrad.addColorStop(1, 'rgba(44, 32, 18, 0)');
+  ctx.fillStyle = spineGrad;
+  ctx.fillRect(W / 2 - 28, 58, 56, H - 116);
+
+  // Trang Trái
+  ctx.fillStyle = '#9a5b2e';
+  ctx.font = '600 23px "Lora", Georgia, serif';
+  ctx.fillText(ch.subtitle.toUpperCase(), 148, 150);
+
+  ctx.fillStyle = '#2c251d';
+  ctx.font = '700 60px "Cormorant Garamond", Georgia, serif';
+  wrapCanvasText(ctx, ch.leftHeading, 148, 232, 625, 70);
+
+  ctx.fillStyle = '#4a3f33';
+  ctx.font = 'italic 32px "Lora", Georgia, serif';
+  wrapCanvasText(ctx, ch.leftNote, 148, 412, 615, 50);
+
+  // Tem bưu chính kỷ niệm góc dưới trái
+  ctx.save();
+  ctx.strokeStyle = 'rgba(154, 91, 46, 0.45)';
+  ctx.setLineDash([6, 4]);
+  ctx.strokeRect(148, H - 235, 220, 86);
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#9a5b2e';
+  ctx.font = '600 38px "Dancing Script", cursive';
+  ctx.fillText('Thanh xuân 12A1', 166, H - 182);
+  ctx.restore();
+
+  // Trang Phải: Khung ảnh Polaroid + Chú thích
+  const photoImg = await loadImageSafe(ch.photo);
+  const frameX = W / 2 + 92, frameY = 138, frameW = 626, frameH = 524;
+  ctx.save();
+  ctx.translate(frameX + frameW / 2, frameY + frameH / 2);
+  ctx.rotate(0.022);
+  ctx.fillStyle = '#ffffff';
+  ctx.shadowColor = 'rgba(44, 32, 18, 0.19)';
+  ctx.shadowBlur = 24;
+  ctx.shadowOffsetY = 10;
+  ctx.fillRect(-frameW / 2, -frameH / 2, frameW, frameH);
+  ctx.shadowColor = 'transparent';
+
+  if (photoImg) {
+    const iw = photoImg.width, ih = photoImg.height;
+    const boxW = frameW - 44, boxH = frameH - 110;
+    const scale = Math.max(boxW / iw, boxH / ih);
+    const sw = boxW / scale, sh = boxH / scale;
+    const sx = (iw - sw) / 2, sy = (ih - sh) / 2;
+    ctx.drawImage(photoImg, sx, sy, sw, sh, -boxW / 2, -frameH / 2 + 22, boxW, boxH);
+  } else {
+    const artGrad = ctx.createLinearGradient(-280, -220, 280, 200);
+    artGrad.addColorStop(0, '#eadbc2');
+    artGrad.addColorStop(1, '#d1bc99');
+    ctx.fillStyle = artGrad;
+    ctx.fillRect(-frameW / 2 + 22, -frameH / 2 + 22, frameW - 44, frameH - 110);
+
+    // Họa tiết tem thư cổ điển
+    ctx.strokeStyle = 'rgba(92, 67, 44, 0.35)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(-frameW / 2 + 44, -frameH / 2 + 44, frameW - 88, frameH - 154);
+
+    ctx.fillStyle = '#5c432c';
+    ctx.font = '700 54px "Dancing Script", cursive';
+    ctx.textAlign = 'center';
+    ctx.fillText('Chương ' + String(index + 1).padStart(2, '0') + ' · 12A1', 0, -14);
+    ctx.font = 'italic 26px "Lora", Georgia, serif';
+    ctx.fillText('“Lưu giữ những điều đẹp đẽ nhất”', 0, 38);
+    ctx.textAlign = 'left';
+  }
+
+  ctx.fillStyle = '#5c432c';
+  ctx.font = '600 36px "Dancing Script", cursive';
+  ctx.textAlign = 'center';
+  ctx.fillText(ch.rightHeading, 0, frameH / 2 - 28);
+  ctx.restore();
+
+  ctx.fillStyle = '#3d3328';
+  ctx.font = '30px "Lora", Georgia, serif';
+  wrapCanvasText(ctx, ch.rightNote, W / 2 + 95, 742, 620, 48);
+
+  // Số trang
+  ctx.fillStyle = 'rgba(44, 37, 29, 0.45)';
+  ctx.font = '23px "Lora", Georgia, serif';
+  ctx.fillText('Trang ' + String(index * 2 + 1).padStart(2, '0'), 148, H - 90);
+  ctx.fillText('Trang ' + String(index * 2 + 2).padStart(2, '0'), W - 255, H - 90);
+
+  return canvas.toDataURL('image/png');
+}
+
+/* ------------------------------------------------ Cơ chế lật trang cong 18 dải 3D */
+const N = 18;
+const SPAN = 0.458;
+const BETA = 0.58;
+let idx = 0, turn = null, strips = [];
+
+function el(t, c) { const e = document.createElement(t); if (c) e.className = c; return e; }
+function imgEl(i, side) {
+  const im = new Image();
+  im.className = 'sb-half-img ' + side;
+  im.draggable = false; im.alt = '';
+  im.src = CHAPTERS[i].url;
+  return im;
+}
+function halfEl(pos, i) {
+  const d = el('div', 'sb-half ' + pos);
+  d.appendChild(imgEl(i, pos));
+  d.appendChild(el('div', 'gutter-shade ' + pos));
+  return d;
+}
+
+function buildCurl(dir, from, to) {
+  strips = [];
+  const c = el('div', 'curl ' + dir);
+  c.style.setProperty('--n', N);
+  c.style.setProperty('--span', SPAN);
+  let host = c;
+  for (let i = 0; i < N; i++) {
+    const s = el('div', 'strip');
+    const gut = 'calc(var(--bw) * 0.5)';
+    const sw = 'calc(var(--bw) * ' + SPAN + ' / ' + N + ')';
+    const A = 'calc(-1 * (' + gut + ' + ' + i + ' * ' + sw + '))';
+    const B = 'calc(' + (i + 1) + ' * ' + sw + ' - ' + gut + ')';
+    const f = el('div', 'face front'), b = el('div', 'face back');
+    const dress = (e, url, px) => {
+      e.style.backgroundImage = 'url(' + url + ')';
+      e.style.backgroundPositionX = px;
+    };
+    dress(f, CHAPTERS[from].url, dir === 'next' ? A : B);
+    dress(b, CHAPTERS[to].url,   dir === 'next' ? B : A);
+    f.appendChild(el('div', 'sh')); f.appendChild(el('div', 'gl'));
+    b.appendChild(el('div', 'sh')); b.appendChild(el('div', 'gl'));
+    s.appendChild(f); s.appendChild(b);
+    host.appendChild(s); host = s;
+    strips.push(s);
+  }
+  return c;
+}
+
+function applyTurn(t) {
+  const th = Math.PI * t;
+  const beta = BETA * Math.sin(Math.PI * t);
+  const D = 180 / Math.PI;
+  const tt = th + beta, td = 2 * beta / N;
+  sb3d.style.setProperty('--tt', (tt * D).toFixed(2) + 'deg');
+  sb3d.style.setProperty('--td', (td * D).toFixed(3) + 'deg');
+  sb3d.style.setProperty('--shade', Math.sin(Math.PI * t).toFixed(3));
+  fadeCaption(t);
+  for (let i = 0; i < strips.length; i++) {
+    const l1 = Math.abs(Math.cos(tt - i * td));
+    const l2 = Math.abs(Math.cos(tt - (i + 1) * td));
+    const st = strips[i].style;
+    st.setProperty('--lit', l1.toFixed(3));
+    st.setProperty('--a1', ((1 - l1) * .60).toFixed(3));
+    st.setProperty('--a2', ((1 - l2) * .60).toFixed(3));
+  }
+}
+
+function paint() {
+  book.textContent = '';
+  if (!turn) {
+    const f = el('div', 'sb-full');
+    const im = new Image();
+    im.src = CHAPTERS[idx].url;
+    im.alt = CHAPTERS[idx].title;
+    im.draggable = false;
+    f.appendChild(im); book.appendChild(f);
+    sb3d.style.setProperty('--shade', '0');
+  } else {
+    const next = turn.dir === 'next';
+    book.appendChild(halfEl('left', next ? turn.from : turn.to));
+    book.appendChild(halfEl('right', next ? turn.to : turn.from));
+    book.appendChild(buildCurl(turn.dir, turn.from, turn.to));
+    applyTurn(turn.t);
+  }
+  const a = el('button', 'sb-zone sb-prev'), b = el('button', 'sb-zone sb-next');
+  a.setAttribute('aria-label', 'Trang trước');
+  b.setAttribute('aria-label', 'Trang sau');
+  book.appendChild(a); book.appendChild(b);
+  layout();
+  caption();
+  marks();
+  syncZoomLayer();
+  placeLoupe();
+}
+
+let capOut = null, capIn = null;
+function caption() {
+  capBox.textContent = '';
+  capOut = capIn = null;
+  const activeIdx = turn ? turn.to : idx;
+  chapterCta.href = CHAPTERS[activeIdx].link;
+  chapterCta.textContent = CHAPTERS[activeIdx].ctaText;
+
+  if (turn) {
+    capOut = el('p', 'sb-caption live'); capOut.textContent = CHAPTERS[turn.from].title; capBox.appendChild(capOut);
+    capIn = el('p', 'sb-caption live'); capIn.textContent = CHAPTERS[turn.to].title; capBox.appendChild(capIn);
+    fadeCaption(turn.t);
+  } else {
+    const p = el('p', 'sb-caption'); p.textContent = CHAPTERS[idx].title; capBox.appendChild(p);
+  }
+}
+function fadeCaption(t) {
+  if (!capOut || !capIn) return;
+  const out = 1 - Math.max(0, Math.min(1, (t - 0.10) / 0.28));
+  const inn = Math.max(0, Math.min(1, (t - 0.56) / 0.30));
+  capOut.style.opacity = out.toFixed(3);
+  capIn.style.opacity = inn.toFixed(3);
+}
+function layout() { sb3d.style.setProperty('--bw', book.clientWidth + 'px'); }
+addEventListener('resize', layout);
+
+/* ------------------------------------------------------ Vòng lặp vật lý lò xo */
+let spring = null, raf = null, last = 0;
+function animateTo(target, onDone, stiff, damp) {
+  spring = { kind: 'spring', v: 0, target, done: onDone, k: stiff || 155, c: damp || 23 };
+  kick();
+}
+function tweenTo(target, dur, onDone) {
+  spring = { kind: 'tween', from: turn ? turn.t : 0, target, dur, e: 0, done: onDone };
+  kick();
+}
+function tick(now) {
+  raf = null;
+  const dt = Math.min(0.032, (now - last) / 1000 || 0.016); last = now;
+  if (spring && turn) {
+    const s = spring;
+    if (s.kind === 'tween') {
+      s.e += dt;
+      const k = Math.min(1, s.e / s.dur);
+      turn.t = s.from + (s.target - s.from) * k;
+      applyTurn(turn.t);
+      if (k >= 1) { spring = null; const d = s.done; d && d(); }
+    } else {
+      const x = turn.t - s.target;
+      s.v += (-s.k * x - s.c * s.v) * dt;
+      turn.t += s.v * dt;
+      if (Math.abs(turn.t - s.target) < 0.002 && Math.abs(s.v) < 0.02) {
+        turn.t = s.target; spring = null;
+        applyTurn(turn.t);
+        const d = s.done; d && d();
+      } else applyTurn(turn.t);
+    }
+  }
+  viewSpring();
+  const lmoved = loupeEase();
+  if ((spring || viewActive || lmoved) && raf === null) raf = requestAnimationFrame(tick);
+}
+function kick() { if (raf === null) { last = performance.now(); raf = requestAnimationFrame(tick); } }
+
+/* ------------------------------------------------------ Nghiêng 3D & Thu phóng */
+const TILT_X = 4.2, TILT_Y = 6.5, ZOOM_MIN = 0.9, ZOOM_MAX = 1.5;
+const view = { rx: 0, ry: 0, z: 1, trx: 0, try_: 0, tz: 1 };
+let viewActive = false, lastZ = 1;
+
+function applyView() {
+  sb3d.style.setProperty('--rx', view.rx.toFixed(2) + 'deg');
+  sb3d.style.setProperty('--ry', view.ry.toFixed(2) + 'deg');
+  sb3d.style.setProperty('--zoom', view.z.toFixed(3));
+  if (view.z !== lastZ) { lastZ = view.z; placeLoupe(); }
+}
+function viewSpring() {
+  const e = 0.14; let moved = false;
+  for (const [k, t] of [['rx', 'trx'], ['ry', 'try_'], ['z', 'tz']]) {
+    const d = view[t] - view[k];
+    if (Math.abs(d) > 0.0006) { view[k] += d * e; moved = true; }
+    else view[k] = view[t];
+  }
+  if (moved) applyView();
+  viewActive = moved;
+  return moved;
+}
+function setView(rx, ry, z) {
+  view.trx = Math.max(-TILT_X, Math.min(TILT_X, rx));
+  view.try_ = Math.max(-TILT_Y, Math.min(TILT_Y, ry));
+  view.tz = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, z));
+  viewActive = true; kick(); syncZoom();
+}
+addEventListener('pointermove', e => {
+  if (e.pointerType === 'touch' || drag) return;
+  const r = book.getBoundingClientRect();
+  if (!r.width) return;
+  const nx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width * 0.62)));
+  const ny = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height * 0.9)));
+  setView(-ny * TILT_X, nx * TILT_Y, view.tz);
+}, { passive: true });
+stage.addEventListener('dblclick', () => setView(view.trx, view.try_, 1));
+
+/* ------------------------------------------------------ Kéo chuột & Lật trang */
+let drag = null, introOn = false;
+function hideHint() { hint.classList.add('gone'); }
+
+stage.addEventListener('pointerdown', e => {
+  if (e.button !== 0) return;
+  e.preventDefault();
+  const onBook = e.target.closest('.sb-zone');
+  stage.setPointerCapture(e.pointerId);
+  hideHint();
+  if (!onBook || introOn) return;
+  stopAutoPlay();
+  const r = book.getBoundingClientRect();
+  const dir = (e.clientX - r.left) / r.width > 0.5 ? 'next' : 'prev';
+  startTurn(dir, 0);
+  drag = { dir, x0: e.clientX, w: r.width, moved: 0, vel: 0, tPrev: performance.now() };
+});
+stage.addEventListener('pointermove', e => {
+  if (!drag) return;
+  const dx = e.clientX - drag.x0;
+  drag.moved = Math.max(drag.moved, Math.abs(dx));
+  const raw = (drag.dir === 'next' ? -dx : dx) / (drag.w * 0.62);
+  const t = Math.max(0, Math.min(1, raw));
+  const now = performance.now();
+  drag.vel = (t - (turn ? turn.t : 0)) / Math.max(0.001, (now - drag.tPrev) / 1000);
+  drag.tPrev = now;
+  if (turn) { turn.t = t; applyTurn(t); }
+});
+function endDrag() {
+  if (!drag) return;
+  const d = drag; drag = null;
+  if (!turn) return;
+  if (d.moved < 6) { commit(); return; }
+  if (turn.t > 0.40 || d.vel > 1.1) commit(); else cancel();
+}
+stage.addEventListener('pointerup', endDrag);
+stage.addEventListener('pointercancel', endDrag);
+
+function startTurn(dir, t) {
+  spring = null;
+  if (turn) { idx = turn.to; turn = null; }
+  shoveLoupe(dir);
+  const from = idx;
+  turn = { dir, from, to: dir === 'next' ? (from + 1) % M : (from - 1 + M) % M, t: t || 0 };
+  paint();
+}
+function commit() {
+  if (!turn) return;
+  if (REDUCED) { idx = turn.to; turn = null; paint(); return; }
+  animateTo(1, () => { idx = turn.to; turn = null; paint(); }, 165, 25);
+}
+function cancel() {
+  if (!turn) return;
+  animateTo(0, () => { turn = null; paint(); }, 150, 24);
+}
+function step(dir) {
+  if (introOn) endIntro();
+  if (turn) { idx = turn.to; turn = null; }
+  startTurn(dir, 0); commit();
+}
+function goTo(i) {
+  if (introOn) endIntro();
+  stopAutoPlay();
+  if (i === idx) return;
+  if (turn) { idx = turn.to; turn = null; }
+  const fwd = (i - idx + M) % M, back = (idx - i + M) % M;
+  if (Math.min(fwd, back) === 1) { step(fwd === 1 ? 'next' : 'prev'); return; }
+  idx = i; paint();
+}
+
+document.getElementById('sbLeft').onclick = () => { stopAutoPlay(); step('prev'); };
+document.getElementById('sbRight').onclick = () => { stopAutoPlay(); step('next'); };
+addEventListener('keydown', e => {
+  if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+  e.preventDefault(); hideHint(); stopAutoPlay();
+  step(e.key === 'ArrowRight' ? 'next' : 'prev');
+});
+document.getElementById('heroDown').onclick = () => {
+  document.getElementById('about').scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+/* ------------------------------------------------------ Kính lúp đồng cổ 2.3x */
+const loupe = document.getElementById('loupe');
+const zoomWrap = document.getElementById('zoomWrap');
+const zoomInner = document.getElementById('zoomInner');
+const zRead = document.getElementById('zRead');
+const loupeBtn = document.getElementById('loupeBtn');
+const zInBtn = document.getElementById('zIn'), zOutBtn = document.getElementById('zOut');
+const MAG = 2.3;
+let loupeOn = true, lx = null, ly = null, lgrab = null, lTarget = null;
+
+function loupeSize() { return Math.round(Math.max(156, Math.min(244, book.clientWidth * 0.23))); }
+function restLoupe() {
+  lx = book.clientWidth * 0.85;
+  ly = book.clientHeight * 0.78;
+  placeLoupe();
+}
+function syncZoomLayer() {
+  zoomInner.textContent = '';
+  for (const c of book.children) {
+    if (c.classList.contains('sb-zone')) continue;
+    zoomInner.appendChild(c.cloneNode(true));
+  }
+}
+function placeLoupe() {
+  if (lx === null || !book.clientWidth) return;
+  const bw = book.clientWidth, bh = book.clientHeight;
+  const R = loupeSize() / 2, bez = R * 2 * 0.058;
+  loupe.style.setProperty('--lr', R * 2 + 'px');
+  loupe.style.transform = 'translate3d(' + (lx - R).toFixed(1) + 'px,' + (ly - R).toFixed(1) + 'px,0)';
+  if (loupeOn) loupe.classList.add('on');
+
+  const z = view.z, cx = bw / 2, cy = bh / 2;
+  const x0 = cx + (bw * .04 - cx) * z, x1 = cx + (bw * .96 - cx) * z;
+  const y0 = cy + (bh * .05 - cy) * z, y1 = cy + (bh * .95 - cy) * z;
+  const nx = Math.max(x0, Math.min(lx, x1)), ny = Math.max(y0, Math.min(ly, y1));
+  const inside = (lx > x0 && lx < x1 && ly > y0 && ly < y1)
+    ? Math.min(lx - x0, x1 - lx, ly - y0, y1 - ly)
+    : -Math.hypot(lx - nx, ly - ny);
+  const k = Math.max(0, Math.min(1, (inside + R * 0.30) / (R * 0.55)));
+
+  zoomWrap.style.opacity = (loupeOn ? k : 0).toFixed(3);
+  if (k <= 0.002) return;
+  const r = (R - bez).toFixed(1);
+  const mask = 'radial-gradient(circle ' + r + 'px at ' + lx.toFixed(1) + 'px ' + ly.toFixed(1) + 'px,#000 calc(100% - 1px),transparent 100%)';
+  zoomWrap.style.webkitMaskImage = mask;
+  zoomWrap.style.maskImage = mask;
+  const px = cx + (lx - cx) / z, py = cy + (ly - cy) / z, s = MAG * z;
+  zoomInner.style.transform = 'translate(' + (lx - px * s).toFixed(1) + 'px,' + (ly - py * s).toFixed(1) + 'px) scale(' + s.toFixed(4) + ')';
+}
+function shoveLoupe(dir) {
+  if (!loupeOn || lx === null || lgrab) return;
+  lTarget = { x: book.clientWidth * (dir === 'next' ? 0.15 : 0.85), y: book.clientHeight * 0.78 };
+  kick();
+}
+function loupeEase() {
+  if (!lTarget) return false;
+  if (lgrab) { lTarget = null; return false; }
+  const dx = lTarget.x - lx, dy = lTarget.y - ly;
+  if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) { lx = lTarget.x; ly = lTarget.y; lTarget = null; placeLoupe(); return false; }
+  lx += dx * 0.16; ly += dy * 0.16; placeLoupe();
+  return true;
+}
+
+loupe.addEventListener('pointerdown', e => {
+  if (!loupeOn || e.button !== 0) return;
+  e.preventDefault(); e.stopPropagation();
+  lTarget = null;
+  lgrab = { cx: e.clientX, cy: e.clientY, lx0: lx, ly0: ly };
+  loupe.classList.add('held');
+  loupe.setPointerCapture(e.pointerId);
+  hideHint();
+});
+loupe.addEventListener('pointermove', e => {
+  if (!lgrab) return;
+  const R = loupeSize() / 2;
+  lx = Math.max(-R * 0.5, Math.min(book.clientWidth + R * 0.5, lgrab.lx0 + (e.clientX - lgrab.cx)));
+  ly = Math.max(-R * 0.5, Math.min(book.clientHeight + R * 0.6, lgrab.ly0 + (e.clientY - lgrab.cy)));
+  placeLoupe();
+});
+function dropLoupe() { lgrab = null; loupe.classList.remove('held'); }
+loupe.addEventListener('pointerup', dropLoupe);
+loupe.addEventListener('pointercancel', dropLoupe);
+
+loupeBtn.onclick = () => {
+  loupeOn = !loupeOn;
+  loupeBtn.setAttribute('aria-pressed', String(loupeOn));
+  loupe.classList.toggle('on', loupeOn);
+  if (loupeOn && lx === null) restLoupe();
+  placeLoupe();
+};
+addEventListener('resize', () => { lx = null; restLoupe(); });
+
+function syncZoom() {
+  zRead.textContent = Math.round(view.tz * 100) + '%';
+  zOutBtn.disabled = view.tz <= ZOOM_MIN + 0.001;
+  zInBtn.disabled = view.tz >= ZOOM_MAX - 0.001;
+}
+zInBtn.onclick = () => { setView(view.trx, view.try_, view.tz * 1.15); hideHint(); };
+zOutBtn.onclick = () => { setView(view.trx, view.try_, view.tz / 1.15); hideHint(); };
+
+/* ------------------------------------------------------ Hiệu ứng lật mở sổ lúc vào trang */
+let riffle = null, riffleAt = 0;
+function endIntro() { introOn = false; wrap.classList.remove('intro', 'b2'); }
+function riffleStep() {
+  const s = riffle[riffleAt];
+  wrap.classList.toggle('b2', s.bell > 0.55);
+  startTurn('next', 0);
+  tweenTo(1, s.dur, () => {
+    idx = turn.to; turn = null;
+    riffleAt++;
+    if (introOn && riffleAt < riffle.length) { paint(); riffleStep(); }
+    else { endIntro(); paint(); }
+  });
+}
+function startIntro() {
+  const coarse = matchMedia('(max-width: 640px), (pointer: coarse)').matches;
+  if (coarse || REDUCED) { idx = 0; paint(); return; }
+  const steps = M;
+  riffle = [];
+  for (let r = 0; r < steps; r++) {
+    const bell = Math.sin(Math.PI * (r / Math.max(1, steps - 1)));
+    riffle.push({ bell, dur: 0.21 - 0.14 * bell });
+  }
+  riffleAt = 0; introOn = true; wrap.classList.add('intro');
+  riffleStep();
+}
+
+/* ------------------------------------------------------ Tự động lật trang trình chiếu */
+const autoPlayBtn = document.getElementById('autoPlayBtn');
+let autoTimer = null;
+function stopAutoPlay() {
+  if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+  autoPlayBtn.setAttribute('aria-pressed', 'false');
+}
+autoPlayBtn.onclick = () => {
+  if (autoTimer) { stopAutoPlay(); return; }
+  autoPlayBtn.setAttribute('aria-pressed', 'true');
+  step('next');
+  autoTimer = setInterval(() => step('next'), 4500);
+};
+
+/* ------------------------------------------------------ Mục lục 9 chương bên dưới */
+const plateList = document.getElementById('plateList');
+CHAPTERS.forEach((ch, i) => {
+  const li = el('li', 'plate-row');
+  const jumpBtn = el('button', 'plate-jump');
+  jumpBtn.innerHTML =
+    '<span class="n">' + String(i + 1).padStart(2, '0') + '</span>' +
+    '<span class="t">' + ch.title + '</span>' +
+    '<span class="p">' + ch.subtitle.split('·')[0].trim() + '</span>';
+  jumpBtn.onclick = () => {
+    goTo(i);
+    document.getElementById('sketchbook').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+  const openLink = el('a', 'plate-link');
+  openLink.href = ch.link;
+  openLink.textContent = 'Mở trang';
+
+  li.appendChild(jumpBtn);
+  li.appendChild(openLink);
+  plateList.appendChild(li);
+});
+
+function marks() {
+  const cur = turn ? turn.to : idx;
+  plateList.querySelectorAll('.plate-row').forEach((row, i) => {
+    row.setAttribute('aria-current', i === cur ? 'true' : 'false');
+  });
+}
+
+/* ------------------------------------------------------ Trình phát nhạc Piano kỷ yếu */
+const musicBtn = document.getElementById('musicBtn');
+const musicLabel = document.getElementById('musicLabel');
+const bgAudio = document.getElementById('bgAudio');
+let isPlaying = false, synthInterval = null, audioCtx = null;
+
+function playGentleMusicBox() {
+  const notes = [523.25, 659.25, 783.99, 659.25, 587.33, 698.46, 880.00, 698.46];
+  let stepNote = 0;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  synthInterval = setInterval(() => {
+    if (!isPlaying) return;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = notes[stepNote % notes.length];
+    gain.gain.setValueAtTime(0.032, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(); osc.stop(audioCtx.currentTime + 1.25);
+    stepNote++;
+  }, 750);
+}
+
+musicBtn.onclick = async () => {
+  isPlaying = !isPlaying;
+  musicBtn.setAttribute('aria-pressed', String(isPlaying));
+  musicBtn.classList.toggle('playing', isPlaying);
+  musicLabel.textContent = isPlaying ? 'Nhạc Piano: Đang phát' : 'Nhạc Piano: Tắt';
+
+  if (isPlaying) {
+    try { await bgAudio.play(); }
+    catch { playGentleMusicBox(); }
+  } else {
+    bgAudio.pause();
+    if (synthInterval) { clearInterval(synthInterval); synthInterval = null; }
+  }
+};
+
+addEventListener('pagehide', () => {
+  try {
+    localStorage.setItem('x12_at', JSON.stringify({ s: './audio/piano/theme.mp3', t: bgAudio.currentTime || 0, d: Date.now() }));
+  } catch {}
+});
+
+/* Thanh tiến độ cuộn */
+const scrollBar = document.getElementById('scrollBar');
+addEventListener('scroll', () => {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  scrollBar.style.setProperty('--sp', max > 0 ? Math.min(1, scrollY / max) : 0);
+}, { passive: true });
+
+/* ------------------------------------------------------ Khởi chạy cuốn sổ */
+(async function boot() {
+  for (let i = 0; i < CHAPTERS.length; i++) {
+    CHAPTERS[i].url = await renderSpreadDataUrl(CHAPTERS[i], i);
+  }
+  paint();
+  applyView();
+  syncZoom();
+  restLoupe();
+  setTimeout(startIntro, 240);
+})();
+</script>
+</body>
+</html>

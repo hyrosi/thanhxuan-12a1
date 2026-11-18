@@ -1,0 +1,45 @@
+====================================================================
+  KỶ YẾU 12A1 — SỔ TAY THANH XUÂN 3D (BẢN NÂNG CẤP HOÀN CHỈNH)
+====================================================================
+
+1. CÁCH MỞ WEB NHANH NHẤT:
+   - Windows: Giải nén file ZIP -> bấm đúp vào file  BAT-WEB.bat
+     (Trình duyệt sẽ tự mở http://localhost:3000).
+   - macOS / Linux: Mở Terminal tại thư mục này và chạy:  bash bat-web.sh
+   - Lưu ý: Trang chủ (index.html) có thể mở trực tiếp bằng trình duyệt,
+     nhưng để dùng đầy đủ Phòng 12A1 (giải mã mật khẩu) và Hành trình CSV,
+     hãy mở qua BAT-WEB.bat (http://localhost:3000).
+
+2. NHỮNG TÍNH NĂNG MỚI ĐÃ ĐƯỢC TÍCH HỢP:
+   - Trang chủ (index.html):
+     * Cuốn Sổ Tay Thanh Xuân 3D với hiệu ứng lật trang cong 18 dải vật lý.
+     * Kính lúp đồng cổ phóng đại 2.3x: kéo qua ảnh lớp để soi từng gương mặt.
+     * Mục lục 9 chương kỷ yếu nối thẳng tới từng trang chuyên biệt.
+     * Trình phát nhạc Piano kỷ yếu (tự đồng bộ khi chuyển giữa các trang).
+   - Hành trình 3 năm (hanh-trinh.html):
+     * Có thêm tab "Tất cả 3 năm" xem xuyên suốt 10A1 -> 11A1 -> 12A1,
+       bấm vào ảnh để phóng to toàn màn hình.
+   - Lưu bút (luu-but.html):
+     * Có thêm Góc Viết Lưu Bút Mới: viết lời nhắn, lưu lại và bấm
+       "Tải thiệp PNG" để xuất tấm thiệp kỷ niệm mang về.
+   - Phòng 12A1 (phong-12a1.html):
+     * Bộ lọc Tất cả / Đã mở / Có mật khẩu, hiệu ứng pháo giấy khi mở khóa,
+       và nút tải thiệp bí mật (.png).
+   - Trả bài cũ (tra-bai-cu.html):
+     * Vòng quay có âm thanh tíc-tắc, pháo giấy chúc mừng và xuất thiệp PNG.
+
+3. CÁCH CHỈNH SỬA THÔNG TIN LỚP (EXCEL / CSV):
+   - data/thanh-vien.csv : Danh sách 42 thành viên, biệt danh, lời chúc, mật khẩu.
+   - data/hanh-trinh.csv : Các mốc sự kiện 10A1, 11A1, 12A1.
+   - data/chuong.csv     : Lời mở đầu & lời kết từng năm học.
+   - data/thay-co.csv    : Thông tin GVCN & Thầy cô bộ môn.
+   => Sau khi sửa file CSV, bấm đúp CAP-NHAT.bat (hoặc BAT-WEB.bat) rồi
+      nhấn Ctrl + F5 trên trình duyệt để cập nhật!
+
+4. THƯ MỤC ẢNH & NHẠC:
+   - images/home/lop-12a1.jpg : Ảnh bìa tập thể lớp 12A1.
+   - images/members/          : Ảnh từng thành viên (member-01.jpg ... member-42.jpg).
+   - images/teachers/         : Ảnh thầy cô.
+   - media/images/            : Ảnh các mốc hành trình & khoảnh khắc.
+   - audio/piano/theme.mp3    : Nhạc nền piano (đặt file mp3 tên theme.mp3 vào đây).
+====================================================================
